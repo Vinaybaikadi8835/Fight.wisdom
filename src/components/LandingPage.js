@@ -12,7 +12,7 @@ const LandingPage = () => {
 
     if (email) {
       try {
-        const response = await fetch("http://localhost:5000/api/emails", {
+        const response = await fetch("https://fight-wisdom-ugmr.vercel.app/api/emails", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -53,8 +53,7 @@ const LandingPage = () => {
           <button type="submit">Join Now</button>
         </form>
         
-          <button onClick={() => navigate('/ecommerce')} className="shop-btn">Go to Store</button>
-        
+        <button onClick={() => navigate('/ecommerce')} className="shop-btn">Go to Store</button>
       </div>
     </div>
   );
