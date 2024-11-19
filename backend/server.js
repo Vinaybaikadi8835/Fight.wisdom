@@ -4,14 +4,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const PORT = 5000;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
-const MONGO_URI = "mongodb+srv://nanivinay8835:DJ6oPIVl2n0tFzJv@cluster0.ofbwy.mongodb.net/"; // Replace with your MongoDB Atlas URI
+const MONGO_URI = process.env.MONGO_URI; // Load from environment variables
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected!"))
@@ -23,6 +22,11 @@ const emailSchema = new mongoose.Schema({
 });
 
 const Email = mongoose.model("Email", emailSchema);
+
+// Root Path Handler
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 // API Endpoint for Saving Emails
 app.post("/api/emails", async (req, res) => {
@@ -37,8 +41,11 @@ app.post("/api/emails", async (req, res) => {
     await newEmail.save();
     res.status(200).json({ message: "Email saved successfully!" });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Server error, please try again" });
   }
 });
 
+// Port Configuration
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
