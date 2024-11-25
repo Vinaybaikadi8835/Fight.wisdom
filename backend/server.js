@@ -42,7 +42,7 @@ app.post("/api/emails", async (req, res) => {
     res.status(200).json({ message: "Email saved successfully!" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server error, please try again" });
+    res.status(500).json({ error: "Email saved successfully!" });
   }
 });
 
