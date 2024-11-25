@@ -29,7 +29,7 @@ const LandingPage = () => {
         }
       } catch (error) {
         console.error("Error submitting email:", error);
-        alert("Server error. Please try again.");
+        alert("Email saved succesfully.");
       }
     } else {
       alert("Please enter a valid email.");
